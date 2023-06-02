@@ -40,6 +40,35 @@ app.get('/magic/:question', (req, res) => {
     res.send(response);
 });
 
+// Fibonacci //
+
+function fibonacciNumber(num) {
+    if (num === 0 || num === 1) {
+      return true;
+    }
+  
+    let prev = 0;
+    let curr = 1;
+    while (curr < num) {
+      const next = prev + curr;
+      prev = curr;
+      curr = next;
+    }
+  
+    return curr === num;
+  }
+
+app.get('/fibonacci/:number', (req, res) => {
+    const number = parseInt(req.params.number);
+
+    if (fibonacciNumber(number)) {
+        res.send('<h1>Yes! It is a Fibonacci number.</h1>');
+    } else {
+        res.send('<h1>Girl bye, this is not a Fibonacci number.</h1>');
+    }
+
+});
+
 app.listen(port, () => {
     console.log(`The server is listening on port ${port} gang!`);
 });
